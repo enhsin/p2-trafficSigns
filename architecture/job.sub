@@ -1,0 +1,34 @@
+#!/bin/sh -l
+#PBS -l nodes=1:ppn=1,naccesspolicy=shared
+#PBS -l walltime=48:00:00
+cd $PBS_O_WORKDIR
+module load gcc/5.2.0
+export PATH="/scratch/halstead/e/epeng/miniconda3/bin:$PATH"
+source activate carnd-term1
+python architecture.py 12 16 120 80
+python architecture.py 12 16 240 80
+python architecture.py 12 16 240 160
+python architecture.py 12 16 240 240
+python architecture.py 12 32 120 80
+python architecture.py 12 32 240 80
+python architecture.py 12 32 240 160
+python architecture.py 12 32 240 240
+python architecture.py 12 32 480 80
+python architecture.py 12 32 480 160
+python architecture.py 12 32 480 240
+python architecture.py 12 48 120 80
+python architecture.py 12 48 240 80
+python architecture.py 12 48 240 160
+python architecture.py 12 48 240 240
+python architecture.py 12 48 480 80
+python architecture.py 12 48 480 160
+python architecture.py 12 48 480 240
+python architecture.py 12 64 120 80
+python architecture.py 12 64 240 80
+python architecture.py 12 64 240 160
+python architecture.py 12 64 240 240
+python architecture.py 12 64 480 80
+python architecture.py 12 64 480 160
+python architecture.py 12 64 480 240
+source deactivate carnd-term1
+
