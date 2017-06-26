@@ -40,6 +40,7 @@ I use [LeNet-5](https://github.com/udacity/CarND-LeNet-Lab) taught in the Convol
 | 4. RELU					            |												|
 | 5. Fully connected		    | outputs 43 | 
 
+The last layer outputs the logits of 43 classes and feeds to  _tf.nn.softmax_cross_entropy_with_logits_, which performs softmax activation on logits and creates a cross-entropy loss. The loss function is minimized by _tf.train.AdamOptimizer_.
 
 #### 3. Model Training
 
@@ -73,7 +74,7 @@ Here are five German traffic signs that I found on the web:
 
 ![alt text](./images/new_images_5.png "new images")
 
-The second image might be challenging because the image resolution is low and the colors have faded.  The last one is partially covered by the snow. 
+The second image (Keep left) might be challenging because the image resolution is low and the colors have faded.  The last one is partially covered by the snow. 
 
 Here are the results of the prediction:
 
