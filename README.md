@@ -100,7 +100,27 @@ The top five soft max probabilities for each images are
 The predictions are all very certain except for the second image.  The top 5 guesses for the second image are the following: Yield (69%), Keep left (26%), Go straight or left (4%), Turn left ahead (1%), Ahead only (0.003%).
 
 ### Visualizing the Neural Network
-#### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
+Here are the features that activate the neurons of the first convolutional layer. It seems to recognize all the major shape and pattern of the sign.
 
-![alt text](./images/feature_maps.png "features")
+* Bumpy road
+![alt text](./images/feature_1.jpg "features 1")
+* Keep left
+![alt text](./images/feature_2.jpg "features 2")
+* Speed limit (30km/h)
+![alt text](./images/feature_3.jpg "features 3")
+* No passing
+![alt text](./images/feature_4.jpg "features 4")
+* General caution 
+![alt text](./images/feature_5.jpg "features 5")
 
+Here is the visualization of the second convolutional layer. The pattern is difficult to recognize. 
+* Bumpy road
+![alt text](./images/feature_6.jpg "features 6")
+* Keep left
+![alt text](./images/feature_7.jpg "features 7")
+* Speed limit (30km/h)
+![alt text](./images/feature_8.jpg "features 8")
+* No passing
+![alt text](./images/feature_9.jpg "features 9")
+* General caution 
+![alt text](./images/feature_10.jpg "features 10")
