@@ -19,7 +19,7 @@ Here is the distribution of classes. Some signs have more examples, which could 
 ### Design and Test a Model Architecture
 
 #### 1. Preprocessing
-The image has been normalized by subtracting the mean of the image (flatten array of all three channels) and dividing by the standard deviation of the image. This makes all the feature center around zero and have unit variance. Normalization helps the algorithm learn features from low-contrast images better. 
+The image has been normalized by subtracting the mean of the image across three channels and dividing by the standard deviation of the image. This makes all the feature center around zero and have unit variance. Normalization helps the algorithm learn features from low-contrast images better. 
 
 #### 2. Model Architecture 
 I use [LeNet-5](https://github.com/udacity/CarND-LeNet-Lab) taught in the Convolutional Neural Network lesson as my model. It consists of the following layers:
@@ -44,29 +44,20 @@ The last layer outputs the logits of 43 classes and feeds to  _tf.nn.softmax_cro
 
 #### 3. Model Training
 
-To train the model, I used an ....
+The batch size was initially set at 512, which gave a validation accuracy of 0.91. As the batch size decreases, it introduces more randomness to the gradient descent method and the optimization gets better.  A batch size that is too small may learn very slowly. The final model uses a batch size of 96.
+
+The number of epochs is determined by the validation accuracy. The model keeps training until the absolute difference of the validation accuracy of the current and the previous epoch is smaller than 0.0002. It typically takes 20-50 epochs to converge.
+
+I use grid search to find the hyperparameters of the network architecture, specifically the filter size of the convolution layers, d1 and d2, the output size of the fully connected layers, d3 and d4. The convolution kernel size, stride, max pooling window size are fixed at the values used in LeNet-5 lesson. The grid search results are listed in [here](./architecture/README.md) with best d1, d2, d3, d4 at 24, 32, 120, 80 respectively.
 
 #### 4. Solution Approach
 
-Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
-
-
+Here is the performance of the model.
 * training set accuracy = 100%
 * validation set accuracy = 96.5% 
 * test set accuracy = 95.4%
 
-If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-* What were some problems with the initial architecture?
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-* Which parameters were tuned? How were they adjusted and why?
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
-
-If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
- 
+The model is somewhat overfitted because the training accuracy is bigger than the accuracy on the test set.  I tried to add dropout to layer 3, but it didn’t improve the model accuracy. I also tried to decrease the convolution kernel size to 3x3 in the hope that the model could recognize smaller features better. It didn’t perform as well as 5x5 convolution and it expanded the parameter space. 
 
 ### Test a Model on New Images
 
