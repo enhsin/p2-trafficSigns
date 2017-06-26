@@ -49,10 +49,10 @@ To train the model, I used an ....
 
 Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
-My final model results were:
-* training set accuracy of ?
-* validation set accuracy of ? 
-* test set accuracy of ?
+
+* training set accuracy = 100%
+* validation set accuracy = 96.5% 
+* test set accuracy = 95.4%
 
 If an iterative approach was chosen:
 * What was the first architecture that was tried and why was it chosen?
@@ -97,7 +97,7 @@ The top five soft max probabilities for each images are
 | No passing            | 1.00e+00  | 8.14e-22  | 2.82e-24  | 2.01e-27  | 6.92e-31 |
 | General caution       | 1.00e+00  | 2.17e-14  | 4.45e-16  | 1.96e-19  | 1.74e-19 |
 
-The predictions are all very certain except for the second image.  The top 5 guesses for the second image are the following: Yield (69%), Keep left (26%), Go straight or left (4%), Turn left ahead (1%), Ahead only (0.003%).
+The predictions are all very certain except for the second image.  The top 5 guesses for the second image are the following: Yield (69%), Keep left (26%), Go straight or left (4%), Turn left ahead (1%), Ahead only (0.003%). It’s interesting that the model thinks the second image, Keep left (round), as Yield (triangle). Maybe it mistakenly selects the arrow head as the area of interest.
 
 ### Visualizing the Neural Network
 Here are the features that activate the neurons of the first convolutional layer. It seems to recognize all the major shape and pattern of the sign.
