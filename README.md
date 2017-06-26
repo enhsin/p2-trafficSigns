@@ -22,7 +22,7 @@ Here is the distribution of classes. Some signs have more examples, which could 
 The image has been normalized by subtracting the mean of the image (flatten array of all three channels) and dividing by the standard deviation of the image. This makes all the feature center around zero and have unit variance. Normalization helps the algorithm learn features from low-contrast images better. 
 
 #### 2. Model Architecture 
-I use [LeNet-5](https://github.com/udacity/CarND-LeNet-Lab) taught in the Convolutional Neural Network (CNN) lesson as my model. The model consists of the following layers:
+I use [LeNet-5](https://github.com/udacity/CarND-LeNet-Lab) taught in the Convolutional Neural Network lesson as my model. It consists of the following layers:
 
 | Layer         		|     Description	        					| 
 |:---------------------:|:---------------------------------------------:| 
@@ -73,41 +73,34 @@ Here are five German traffic signs that I found on the web:
 
 ![alt text](./images/new_images_5.png "new images")
 
-The second image might be challenging because the sign is dirty and the colors have faded.  The last one is partially covered by the snow. 
-
-####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
+The second image might be challenging because the image resolution is low and the colors have faded.  The last one is partially covered by the snow. 
 
 Here are the results of the prediction:
 
-| Image			        |     Prediction	        					| 
+| Image			              |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+| Bumpy road               | Bumpy road   									| 
+| Keep left     		         | Yield 										|
+| Speed limit (30km/h)					| Speed limit (30km/h)											|
+| No passing               | No passing					 				|
+| General caution			       | General caution     							|
 
+4 out of 5 predictions are correct, which gives an accuracy of 80%.
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+The top five soft max probabilities for each images are
 
-#### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
+| Image			              |    1st    |    2nd    |    3rd    |    4th    |    5th   |    
+|:---------------------:|:----------|-----------|-----------|-----------|---------:| 
+| Bumpy road            | 1.00e+00  | 1.96e-08  | 7.57e-09  | 2.09e-15  | 1.02e-16 |
+| Keep left             | 6.94e-01  | 2.55e-01  | 3.60e-02  | 1.40e-02  | 3.42e-05 |
+| Speed limit (30km/h)  | 9.99e-01  | 5.98e-08  | 4.23e-10  | 2.31e-11  | 1.79e-11 |
+| No passing            | 1.00e+00  | 8.14e-22  | 2.82e-24  | 2.01e-27  | 6.92e-31 |
+| General caution       | 1.00e+00  | 2.17e-14  | 4.45e-16  | 1.96e-19  | 1.74e-19 |
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
+The predictions are all very certain except for the second image.  The top 5 guesses for the second image are the following: Yield (69%), Keep left (26%), Go straight or left (4%), Turn left ahead (1%), Ahead only (0.003%).
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
-
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
-
-
-For the second image ... 
-
-### Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
+### Visualizing the Neural Network
 #### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
 
+![alt text](./images/feature_maps.png "features")
 
