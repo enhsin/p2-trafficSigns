@@ -1,3 +1,24 @@
+# Tuning hyperparameters of the network architecture
+
+Here is my network architecture. 
+
+| Layer                 |     Description                               | 
+|:---------------------:|:---------------------------------------------:| 
+| Input                     | 32x32x3 RGB image                             | 
+| 1. Convolution 5x5        | 1x1 stride, valid padding, outputs 28x28xd1   |
+| 1. RELU                               |                                               |
+| 1. Max pooling              | 2x2 stride,  outputs 14x14xd1               |
+| 2. Convolution 5x5         | 1x1 stride, valid padding, outputs 10x10xd2 |
+| 2. RELU                               |                                               |
+| 2. Max pooling              | 2x2 stride,  outputs 5x5xd2                 |
+| 3. Fully connected            | outputs d3 |
+| 3. RELU                               |                                               |
+| 4. Fully connected            | outputs d4 |
+| 4. RELU                               |                                               |
+| 5. Fully connected            | outputs 43 | 
+
+I use grid search to find the best filter size of the convolution layers, d1 and d2, and the output size of the fully connected layers, d3 and d4. The accuracy of the validation set is listed below. The batch size is 128 and the learning rate is 0.001. The model keeps training until the absolute difference of the validation accuracy of the current and the previous epoch is smaller than 0.0002. 
+
 va - validation accuracy
 
 ta - train accuracy
@@ -46,3 +67,5 @@ d1   | d2 |  d3 | d4  | va     | va/ta
  12  |64  | 480 | 160 | 0.9438 | 0.9454 
  24  |32  | 120 |  80 | 0.9655 | 0.9655 
  24  |64  | 480 |  80 | 0.9390 | 0.9391 
+
+This work is done at Purdue RHEL6 (Santiago) clusters. There is no binary package of TensorFlow for RHEL systems, so I build it from the source with the latest release version 1.2.0. The results will be slightly different on version 0.12.1 that the course is currently using. 
