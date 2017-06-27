@@ -48,10 +48,7 @@ X_test_scaled = scaleData(X_test)
 import tensorflow as tf
 from tensorflow.contrib.layers import flatten
 
-def LeNet(x, n_classes, d1, d2, d3, d4):
-    mu = 0.0
-    sigma = 0.1
-
+def LeNet(x, n_classes, d1, d2, d3, d4, mu=0.0, sigma=0.1):
     # Layer 1: Convolutional. Input = 32x32x3. Output = 28x28xd1.       
     conv1_W = tf.Variable(tf.truncated_normal(shape=(5, 5, 3, d1), mean = mu, stddev = sigma))
     conv1_b = tf.Variable(tf.zeros(d1))
@@ -101,18 +98,8 @@ d4 = int(float(sys.argv[4]))
 
 from sklearn.utils import shuffle
 
-def evaluate(X_data, y_data):
-    num_examples = len(X_data)
-    total_accuracy = 0
-    sess = tf.get_default_session()
-    for offset in range(0, num_examples, BATCH_SIZE):
-        batch_x, batch_y = X_data[offset:offset+BATCH_SIZE], y_data[offset:offset+BATCH_SIZE]
-        accuracy = sess.run(accuracy_operation, feed_dict={x: batch_x, y: batch_y})
-        total_accuracy += (accuracy * len(batch_x))
-    return total_accuracy / num_examples
-
-EPOCHS = 10
-BATCH_SIZE = 512
+EPOCHS = 100
+BATCH_SIZE = 128
 rate = 0.001
 
 x = tf.placeholder(tf.float32, (None, 32, 32, 3))
@@ -131,12 +118,13 @@ accuracy_operation = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 saver = tf.train.Saver()
 
 
-output = 'model_%d_%d_%d_%d' % (d1,d2,d3,d4)
+output = 'model_%d_%d_%d_%d_b%d_r%g' % (d1,d2,d3,d4,BATCH_SIZE,rate)
 ofile=open(output+'.log','w')
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
     num_examples = len(y_train)
-
+    va0 =  0.0
+    mindiff = 0.0005
     for i in range(EPOCHS):
         X_train_scaled, y_train = shuffle(X_train_scaled, y_train)
         for offset in range(0, num_examples, BATCH_SIZE):
@@ -144,23 +132,23 @@ with tf.Session() as sess:
             batch_x, batch_y = X_train_scaled[offset:end], y_train[offset:end]
             sess.run(training_operation, feed_dict={x: batch_x, y: batch_y})
 
-        validation_accuracy = evaluate(X_valid_scaled, y_valid)
-        train_accuracy = evaluate(X_train_scaled, y_train)
+        validation_accuracy = sess.run(accuracy_operation, feed_dict={x: X_valid_scaled, y: y_valid})
+        train_accuracy = sess.run(accuracy_operation, feed_dict={x: X_train_scaled, y: y_train})
         ofile.write('%3d %.4f %.4f\n' % (i,validation_accuracy,validation_accuracy/train_accuracy))
+        if abs(validation_accuracy - va0) < mindiff:
+            break
+        va0 = validation_accuracy
 
     saver.save(sess, output)
     pfile=open('para.txt','a')
     pfile.write('%3d %3d %3d %3d %.4f %.4f \n' % (d1,d2,d3,d4,validation_accuracy,validation_accuracy/train_accuracy))
     pfile.close()
 
-
-with tf.Session() as sess:
-    saver.restore(sess, tf.train.latest_checkpoint('.'))
-
-    test_accuracy = evaluate(X_test_scaled, y_test)
+    test_accuracy = sess.run(accuracy_operation, feed_dict={x: X_test_scaled, y: y_test})
     ofile.write('%3d %.4f %.4f\n' % (EPOCHS,test_accuracy,test_accuracy))
     pfile=open('para_test.txt','a')
     pfile.write('%3d %3d %3d %3d %.4f\n' % (d1,d2,d3,d4,test_accuracy))
     pfile.close()
 
 ofile.close()
+

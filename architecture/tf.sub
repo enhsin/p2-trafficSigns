@@ -1,0 +1,10 @@
+#!/bin/sh -l
+#PBS -l nodes=1:ppn=1,naccesspolicy=shared
+#PBS -l walltime=3:00:00
+cd $PBS_O_WORKDIR
+module load gcc/5.2.0
+export PATH="/scratch/halstead/e/epeng/miniconda3/bin:$PATH"
+source activate carnd-term1
+python Traffic_Sign_Classifier.py D1 D2 D3 D4
+source deactivate carnd-term1
+
