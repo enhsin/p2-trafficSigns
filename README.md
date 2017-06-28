@@ -89,7 +89,10 @@ The top five soft max probabilities for each images are
 | No passing            | 1.00e+00  | 8.14e-22  | 2.82e-24  | 2.01e-27  | 6.92e-31 |
 | General caution       | 1.00e+00  | 2.17e-14  | 4.45e-16  | 1.96e-19  | 1.74e-19 |
 
-The predictions are all very certain except for the second image.  The top 5 guesses for the second image are the following: Yield (69%), Keep left (26%), Go straight or left (4%), Turn left ahead (1%), Ahead only (0.003%). It’s interesting that the model thinks the second image, Keep left (round), as Yield (triangle). Maybe it mistakenly selects the arrow head as the area of interest.
+The predictions are all very certain except for the second image.  The top 5 guesses for the second image are the following: Yield (69%), Keep left (26%), Go straight or left (4%), Turn left ahead (1%), Ahead only (0.003%). It’s interesting that the model thinks the second image, Keep left (round), as Yield (triangle). Maybe it mistakenly selects the head of left arrow as the area of interest. 
+
+The softmax probability of each class of the second image is shown below (in sqrt scale). Also plotted is the average prediction of Keep left sign (#39) in the test set. The model has some troubles distinguish Keep left from Traffic signals (#26), Turn right ahead (#33), Turn left ahead (#34), Keep right (#38), but it rarely thinks Keep left as Yield. Note that Traffic signals (#26) is also a triangle sign with red border. 
+![alt text](./images/prob.png "softmax probability")
 
 ### Visualizing the Neural Network
 Here are the features that activate the neurons of the first convolutional layer. It seems to recognize all the major shape and pattern of the sign.
