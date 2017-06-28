@@ -101,7 +101,7 @@ dropout = float(sys.argv[5])
 
 from sklearn.utils import shuffle
 
-EPOCHS = 100
+EPOCHS = 30
 BATCH_SIZE = 128
 rate = 0.001
 
@@ -126,8 +126,6 @@ ofile=open(output+'.log','w')
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
     num_examples = len(y_train)
-    va0 =  0.0
-    mindiff = 0.0002
     for i in range(EPOCHS):
         X_train_scaled, y_train = shuffle(X_train_scaled, y_train)
         for offset in range(0, num_examples, BATCH_SIZE):
@@ -138,9 +136,6 @@ with tf.Session() as sess:
         validation_accuracy = sess.run(accuracy_operation, feed_dict={x: X_valid_scaled, y: y_valid, keep_prob: 1.})
         train_accuracy = sess.run(accuracy_operation, feed_dict={x: X_train_scaled, y: y_train, keep_prob: 1.-dropout})
         ofile.write('%3d %.4f %.4f\n' % (i,validation_accuracy,validation_accuracy/train_accuracy))
-        if abs(validation_accuracy - va0) < mindiff:
-            break
-        va0 = validation_accuracy
 
     saver.save(sess, output)
     pfile=open('para.txt','a')

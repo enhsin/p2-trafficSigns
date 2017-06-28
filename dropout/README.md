@@ -20,8 +20,11 @@ Here is my network architecture with dropout.
 
 The batch size is 128 and the learning rate is 0.001. The model keeps training until the absolute difference of the validation accuracy of the current and the previous epoch is smaller than 0.0005, which takes about 20 epochs.
 
-dropout   | validation accuracy    | valid accu/train accu   | test accuracy
------| ------| ------|-------
+dropout   | validation accuracy    | valid acc/train acc   | test accuracy
+------|-------| -------|-------
+  0.5 |0.9773 | 0.9878 |0.9568
+  0.6 |0.9673 | 0.9788 |0.9576
+  0.7 |0.9748 | 0.9967 |0.9591 
 
 The key thing is to set _keep_prob_ = 1 when evaluating validation and test accuracy. I forgot that in the beginning and found no benefit of adding a dropout layer.
 ```
