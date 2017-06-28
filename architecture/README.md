@@ -17,7 +17,7 @@ Here is my network architecture.
 | 4. RELU                               |                                               |
 | 5. Fully connected            | outputs 43 | 
 
-I use grid search to find the best filter size of the convolution layers, d1 and d2, and the output size of the fully connected layers, d3 and d4. The accuracy of the validation set is listed below. The batch size is 128 and the learning rate is 0.001. The model keeps training until the absolute difference of the validation accuracy of the current and the previous epoch is smaller than 0.0002. 
+I use grid search to find the best filter size of the convolution layers, d1 and d2, and the output size of the fully connected layers, d3 and d4. The accuracy of the validation set is listed below. The batch size is 128 and the learning rate is 0.001. The model keeps training until the absolute difference of the validation accuracy of the current and the previous epoch is smaller than 0.0005. 
 
 va - validation accuracy
 
