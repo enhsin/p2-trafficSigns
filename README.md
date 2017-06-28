@@ -57,7 +57,7 @@ Here is the performance of the model.
 * validation set accuracy = 96.5% 
 * test set accuracy = 95.4%
 
-The model is overfitted because the training accuracy is bigger than the accuracy on the test set. Adding dropout to layer 3 increases the validation accuracy by 1% and the test accuracy by 0.3%. Details are shown in [here](./dropout/README.md). I also tried to decrease the convolution kernel size to 3x3 in the hope that the model could recognize smaller features better. It didn’t perform as well as 5x5 convolutio. 
+The model is overfitted because the training accuracy is bigger than the accuracy on the test set. Adding dropout to layer 3 increases the validation accuracy by 1% and the test accuracy by 0.3%. Details are shown in [here](./dropout/README.md). I also tried to decrease the convolution kernel size to 3x3 in the hope that the model could recognize smaller features better. It didn’t perform as well as 5x5 convolution. 
 
 ### Test a Model on New Images
 
@@ -89,9 +89,9 @@ The top five soft max probabilities for each images are
 | No passing            | 1.00e+00  | 8.14e-22  | 2.82e-24  | 2.01e-27  | 6.92e-31 |
 | General caution       | 1.00e+00  | 2.17e-14  | 4.45e-16  | 1.96e-19  | 1.74e-19 |
 
-The predictions are all very certain except for the second image.  The top 5 guesses for the second image are the following: Yield (69%), Keep left (26%), Go straight or left (4%), Turn left ahead (1%), Ahead only (0.003%). It’s interesting that the model thinks the second image, Keep left (round), as Yield (triangle). Maybe it mistakenly selects the head of left arrow as the area of interest. 
+The predictions are all very certain except for the second image. The model identifies the last image covered by snow easily. The top 5 guesses for the second image are the following: Yield (69%), Keep left (26%), Go straight or left (4%), Turn left ahead (1%), Ahead only (0.003%). It’s interesting that the model thinks the second image, Keep left (round), as Yield (triangle). Maybe it mistakenly selects the head of left arrow as the area of interest. 
 
-The softmax probability of each class of the second image is shown below (in sqrt scale). Also plotted is the average prediction of Keep left sign (#39) in the test set. The model has some troubles distinguish Keep left from Traffic signals (#26), Turn right ahead (#33), Turn left ahead (#34), Keep right (#38), but it rarely thinks Keep left as Yield. Note that Traffic signals (#26) is also a triangle sign with red border. 
+The softmax probability of each class of the second image is shown below (in sqrt scale). Also plotted is the average prediction of Keep left sign (#39) in the test set. The model has some troubles distinguishing Keep left (#39) from Traffic signals (#26), Turn right ahead (#33), Turn left ahead (#34), Keep right (#38), but it rarely thinks Keep left (#39) as Yield (#13). Note that Traffic signals (#26) is also a triangle sign with red borders like Yield. I don’t quite understand what the model is thinking.
 ![alt text](./images/prob.png "softmax probability")
 
 ### Visualizing the Neural Network

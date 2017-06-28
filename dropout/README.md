@@ -1,6 +1,6 @@
 # Adding dropout layer
 
-Here is my network architecture with dropout.
+Here is my network architecture with dropout added at layer 3.
 
 | Layer                 |     Description                               | 
 |:---------------------:|:---------------------------------------------:| 
@@ -18,7 +18,7 @@ Here is my network architecture with dropout.
 | 4. RELU                               |                                               |
 | 5. Fully connected            | outputs 43 | 
 
-The accuracy on the validation and test set with dropout layer is listed below. The batch size is 128 and the learning rate is 0.001. The model is trained for 30 epochs.
+The accuracy on the validation and test set with dropout is listed below. The batch size is 128 and the learning rate is 0.001. The model is trained for 30 epochs using TensorFlow v1.2.0. It can be downloaded [here](./).
 
 dropout   | validation accuracy    | valid acc/train acc   | test accuracy
 ------|-------| -------|-------
