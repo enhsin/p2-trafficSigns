@@ -57,7 +57,7 @@ Here is the performance of the model.
 * validation set accuracy = 96.5% 
 * test set accuracy = 95.4%
 
-The model is somewhat overfitted because the training accuracy is bigger than the accuracy on the test set.  I tried to add dropout to layer 3, but it didn’t improve the model accuracy. I also tried to decrease the convolution kernel size to 3x3 in the hope that the model could recognize smaller features better. It didn’t perform as well as 5x5 convolution and it expanded the parameter space. 
+The model is overfitted because the training accuracy is bigger than the accuracy on the test set. Adding dropout to layer 3 increases the validation accuracy by 1% and the test accuracy by 0.5%. Details are shown in [here](./dropout/README.md). I also tried to decrease the convolution kernel size to 3x3 in the hope that the model could recognize smaller features better. It didn’t perform as well as 5x5 convolutio. 
 
 ### Test a Model on New Images
 

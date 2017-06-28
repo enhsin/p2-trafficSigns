@@ -18,7 +18,7 @@ Here is my network architecture with dropout.
 | 4. RELU                               |                                               |
 | 5. Fully connected            | outputs 43 | 
 
-The batch size is 128 and the learning rate is 0.001. The model keeps training until the absolute difference of the validation accuracy of the current and the previous epoch is smaller than 0.0005, which takes about 20 epochs.
+The accuracy on the validation and test set with dropout layer is listed below. The batch size is 128 and the learning rate is 0.001. The model is trained for 30 epochs.
 
 dropout   | validation accuracy    | valid acc/train acc   | test accuracy
 ------|-------| -------|-------
