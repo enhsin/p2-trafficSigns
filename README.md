@@ -44,7 +44,7 @@ The last layer outputs the logits of 43 classes and feeds to  _tf.nn.softmax_cro
 
 #### 3. Model Training
 
-The batch size was initially set at 512, which gave a validation accuracy of 0.91. As the batch size decreases, it introduces more randomness to the gradient descent method and the optimization gets better.  A batch size that is too small may learn very slowly. The final model uses a batch size of 96.
+The batch size was initially set at 512, which gave a validation accuracy of 0.91. As the batch size decreases, it introduces more randomness to the gradient descent method and the optimization gets better.  A batch size that is too small may learn very slowly. The final basic model uses a batch size of 96.
 
 The number of epochs is determined by the validation accuracy. The model keeps training until the absolute difference of the validation accuracy of the current and the previous epoch is smaller than 0.0002. It typically takes 20-50 epochs to converge.
 
@@ -52,12 +52,15 @@ I use grid search to find the hyperparameters of the network architecture, speci
 
 #### 4. Solution Approach
 
-Here is the performance of the model.
+Here is the performance of the basic model.
 * training set accuracy = 100%
 * validation set accuracy = 96.5% 
 * test set accuracy = 95.4%
 
-The model is overfitted because the training accuracy is bigger than the accuracy on the test set. Adding dropout to layer 3 increases the validation accuracy by 1% and the test accuracy by 0.3%. Details are shown in [here](./dropout/README.md). I also tried to decrease the convolution kernel size to 3x3 in the hope that the model could recognize smaller features better. It didn’t perform as well as 5x5 convolution. 
+The model is overfitted because the training accuracy is bigger than the accuracy on the test set. Adding dropout to layer 3 increases the validation accuracy by 1% and the test accuracy by 0.3%. Details are shown in [here](./dropout/README.md). I also tried to decrease the convolution kernel size to 3x3 in the hope that the model could recognize smaller features better. It didn't perform as well as 5x5 convolution.
+
+Finally, I augment the training and validation set by translation, rotation and zooming, and increase the size of the data by a factor of 2. The batch size is also increased to 192 to speed up the training. Combining with dropout, the test accuracy increases to 97.0% (+1.1%). The validation accuracy decreases slightly because of augmented validation set. Details can be found [here](./augmentation). After exhausting a lot of computational resources (and my time), I find the best model with validation accuracy of 98.0% and test accuracy of 97.4% using d1=12, d2=64, d3=240, d4=80, dropout=0.8, batch size=192, and epoch=40. Details are shown in [here](./ augmentation). 
+
 
 ### Test a Model on New Images
 
@@ -67,7 +70,7 @@ Here are five German traffic signs that I found on the web:
 
 The second image (Keep left) might be challenging because the image resolution is low and the colors have faded.  The last one is partially covered by the snow. 
 
-Here are the results of the prediction:
+Here are the results of the prediction from the basic model (cell #16 of the Ipython notebook):
 
 | Image			              |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
