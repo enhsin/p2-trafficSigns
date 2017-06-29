@@ -19,7 +19,7 @@ Here is the distribution of classes. Some signs have more examples, which could 
 ### Design and Test a Model Architecture
 
 #### 1. Preprocessing
-The image has been normalized by subtracting the mean of the image across three channels and dividing by the standard deviation of the image. This makes all the feature center around zero and have unit variance. Normalization helps the algorithm learn features from low-contrast images better. 
+The image has been normalized by subtracting the mean of the image across three channels and dividing by the standard deviation of the image (cell #6 of the Ipython [notebook](./Traffic_Sign_Classifier.ipynb)). This makes all the feature center around zero and have unit variance. Normalization helps the algorithm learn features from low-contrast images better. 
 
 #### 2. Model Architecture 
 I use [LeNet-5](https://github.com/udacity/CarND-LeNet-Lab) taught in the Convolutional Neural Network lesson as my model. It consists of the following layers:
@@ -52,7 +52,7 @@ I use grid search to find the hyperparameters of the network architecture, speci
 
 #### 4. Solution Approach
 
-Here is the performance of the basic model.
+Here is the performance of the basic model (cell #10, #11).
 * training set accuracy = 100%
 * validation set accuracy = 96.5% 
 * test set accuracy = 95.4%
@@ -70,7 +70,7 @@ Here are five German traffic signs that I found on the web:
 
 The second image (Keep left) might be challenging because the image resolution is low and the colors have faded.  The last one is partially covered by the snow. 
 
-Here are the results of the prediction from the basic model (cell #16 of the Ipython notebook):
+Here are the results of the prediction from the basic model (cell #16):
 
 | Image			              |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
@@ -82,7 +82,7 @@ Here are the results of the prediction from the basic model (cell #16 of the Ipy
 
 4 out of 5 predictions are correct, which gives an accuracy of 80%.
 
-The top five soft max probabilities for each images are
+The top five soft max probabilities for each image are
 
 | Image			              |    1st    |    2nd    |    3rd    |    4th    |    5th   |    
 |:---------------------:|:----------|-----------|-----------|-----------|---------:| 
@@ -98,7 +98,7 @@ The softmax probability of each class of the second image is shown below (in sqr
 ![alt text](./images/prob.png "softmax probability")
 
 ### Visualizing the Neural Network
-Here are the features that activate the neurons of the first convolutional layer. It seems to recognize all the major shape and pattern of the sign.
+Here are the features that activate the neurons of the first convolutional layer (cell #21). It seems to recognize all the major shape and pattern of the sign.
 
 * Bumpy road
 ![alt text](./images/feature_1.jpg "features 1")
