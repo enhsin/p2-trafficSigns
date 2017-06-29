@@ -137,7 +137,7 @@ dropout = float(sys.argv[5])
 
 from sklearn.utils import shuffle
 
-EPOCHS = 100
+EPOCHS = 40
 BATCH_SIZE = 192
 rate = 0.001
 
